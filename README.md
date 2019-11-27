@@ -14,6 +14,7 @@ $ `sfdx force:org:open -p "/lightning/cmp/c__demo"`
 
 ## Folder Structure
 ```
+force-app/main	
 ├── force-app
 │   └── main
 │       ├── default
