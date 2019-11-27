@@ -1,0 +1,8 @@
+<aura:component >
+	<aura:attribute name="type" type="String" />
+    <aura:attribute name="value" type="Object" />
+    
+    <aura:if isTrue="{!v.type == 'Currency'}">
+        <lightning:input type="number" name="" label="" value="{!v.value}" formatter="currency"/>
+    </aura:if>
+</aura:component>

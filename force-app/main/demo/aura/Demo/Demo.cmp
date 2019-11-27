@@ -1,0 +1,14 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickAction,flexipage:availableForAllPageTypes" access="global" >
+    <aura:attribute name="data" type="Object" />
+    <aura:attribute name="data2" type="Object" />
+    <aura:handler action="{!c.doInit}" value="this" name="init" />
+    
+    <lightning:card >
+        <aura:if isTrue="{!v.data}" >
+            <c:TwoDimensionTable data="{!v.data}" />
+        </aura:if>
+        <aura:if isTrue="{!v.data2}" >
+            <c:TwoDimensionTable data="{!v.data2}" />
+        </aura:if>
+    </lightning:card>
+</aura:component>

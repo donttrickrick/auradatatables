@@ -1,0 +1,58 @@
+<aura:component implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <aura:attribute name="columns" type="Object[]" />
+    <aura:attribute name="data" type="Object[]" />
+    <aura:attribute name="rows" type="Object[]" />
+    
+    <aura:handler value="this" name="init" action="{!c.doInit}" />
+    
+    <aura:if isTrue="{!v.columns.length > 0}" >
+        <div class="slds-table_edit_container slds-is-relative slds-scrollable">
+            <table class="slds-table slds-table_bordered slds-table_cell-buffer" role="grid" onscroll="{!c.handleScroll}" >
+                <thead>
+                    <tr class="slds-text-title--caps">
+                        <th scope="col" style="width: 3.75rem;">
+                        </th>
+                        
+                        <aura:iteration items="{!v.columns}" var="header">
+                            <th data-column-name="{!header.label}" scope="col">
+                                <div class="slds-truncate" title="{!header.label}" >
+                                    <aura:if isTrue="{!header.iconName}">
+                                        <lightning:icon iconName="{!header.iconName}" class="header-icon" size="x-small" />
+                                    </aura:if>
+                                    {!header.label}
+                                </div>
+                            </th>
+                        </aura:iteration>
+                    </tr>
+                </thead>
+                
+                <aura:if isTrue="{!v.rows.length > 0}" >
+                    <tbody>
+                        <!--<aura:iteration items="{!v.data}" var="oneData" >-->
+                        
+                        <aura:iteration items="{!v.rows}" var="oneRow">
+                            <tr class="slds-hint-parent">
+                                
+                                <td class="slds-cell-error slds-cell-edit" role="gridcell">
+                                    <span class="slds-row-number slds-text-body_small slds-text-color_weak"></span>
+                                </td>
+                                
+                                <aura:iteration items="{!oneRow.items}" var="oneItem" >
+                                
+                                    <td class="{!if(oneItem.type == 'Icon', 'slds-align_absolute-center slds-cell-edit', 'slds-cell-edit')}" role="gridcell">
+                                        <span >
+                                            <span class="slds-truncate" title="{!if(oneItem.fieldValue.Name, oneItem.fieldValue.Name, oneItem.fieldValue)}">
+                                                <c:OutputField type="{!oneItem.type}" value="{!oneItem.fieldValue}" />
+                                            </span>
+                                        </span>
+                                    </td>
+                                </aura:iteration>
+                            </tr>
+                        </aura:iteration>
+                               
+                    </tbody>
+                </aura:if>
+            </table>
+        </div>
+    </aura:if>
+</aura:component>

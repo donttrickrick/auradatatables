@@ -1,0 +1,19 @@
+.THIS .slds-table_cell-buffer tr>th:last-child,
+.THIS .slds-table_cell-buffer tr>th:first-child {
+    padding: var(--lwc-tableCellSpacing,0.25rem 0.5rem);
+}
+.THIS .slds-table thead th,
+.THIS .slds-table tbody th,
+.THIS .slds-table tbody td {
+	text-align: center;
+}
+.THIS .slds-table tbody th {
+    background-color: var(--lwc-tableColorBackgroundHeader,rgb(250, 250, 249));
+    color: var(--lwc-tableColorTextHeader,rgb(81, 79, 77));
+    padding: var(--lwc-tableCellSpacing,0.25rem 0.5rem);
+    font-weight: var(--lwc-fontWeightBold,700);
+    line-height: normal;
+}
+.THIS .slds-table ._2nd-level-column-header-left-border {
+    border-left: var(--lwc-borderWidthThin,1px) solid var(--lwc-colorBorder,rgb(221, 219, 218));
+}

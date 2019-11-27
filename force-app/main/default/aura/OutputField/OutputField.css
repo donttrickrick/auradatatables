@@ -1,0 +1,9 @@
+.THIS.pill-list {
+    max-width: 250px;
+}
+.THIS.pill-list .slds-pill__remove {
+    display: none;
+}
+.THIS.pill-list .slds-pill__action {
+    padding-right: 1px;
+}

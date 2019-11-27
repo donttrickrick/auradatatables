@@ -1,0 +1,90 @@
+<aura:component implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <aura:attribute name="type" type="String" />
+    <aura:attribute name="value" type="Object" />
+    <aura:attribute name="modifiedValue" type="Object" />
+    
+    <aura:handler name="init" value="this" action="{!c.doInit}" />
+
+    <lightning:navigation aura:id="navService"/>
+
+    <aura:if isTrue="{!v.type == 'Checkbox'}">
+        <aura:if isTrue="{!v.value == null}" >
+            <p>N/A</p>
+            <aura:set attribute="else" > 
+                <lightning:input type="checkbox" checked="{!v.value}" label="" disabled="true" />
+            </aura:set>
+        </aura:if>
+    </aura:if>
+    <aura:if isTrue="{!v.type == 'CurrencyRange'}">
+        <span>{!concat(v.value.ccy, ' ')}<lightning:formattedNumber value="{!v.value.min}" minimumFractionDigits="0" /> ~ <lightning:formattedNumber value="{!v.value.max}" minimumFractionDigits="0" /></span>
+    </aura:if>
+   
+    <aura:if isTrue="{!v.type == 'Toggle'}">
+        <lightning:input type="toggle" checked="{!v.value}" messageToggleActive="" messageToggleInactive="" disabled="true" />
+    </aura:if>
+    <aura:if isTrue="{!v.type == 'Boolean'}">
+        <p >{!if(v.value == true, 'true', 'false')}</p>
+    </aura:if>
+    <aura:if isTrue="{!v.type == 'Reference'}">
+        <a onclick="{!c.handleClickUrl}" >{!v.value.Name}</a>
+    </aura:if>
+    <aura:if isTrue="{!v.type == 'address'}">
+        <lightning:formattedText />
+    </aura:if>
+    <aura:if isTrue="{!v.type == 'Email'}">
+        <lightning:formattedEmail value="{!v.value}" />
+    </aura:if>
+    <aura:if isTrue="{!v.type == 'DateTime'}">
+        <lightning:formattedDateTime timeZone="{!$Locale.timezone}" value="{!v.value}" year="numeric" month="numeric" day="numeric" hour="2-digit" second="2-digit" minute="2-digit" hour12="false" />
+    </aura:if>
+    <aura:if isTrue="{!v.type == 'Date'}">
+        <lightning:formattedDateTime timeZone="{!$Locale.timezone}" value="{!v.value}" year="numeric" month="numeric" day="numeric" />
+    </aura:if>
+    <aura:if isTrue="{!v.type == 'Icon'}">
+        <lightning:icon iconName="{!v.value}" size="x-small" />
+    </aura:if>
+    <aura:if isTrue="{!v.type == 'Multi-Select'}">
+        <div class="pill-list" >
+            <aura:iteration items="{!v.modifiedValue}" var="oneValue" indexVar="index" >
+                <p class="slds-truncate_container_100">
+                    {!oneValue}
+                </p>
+            </aura:iteration>
+        </div>
+    </aura:if>
+    <aura:if isTrue="{!v.type == 'URL[]'}">
+        <div class="pill-list" >
+            <aura:iteration items="{!v.value}" var="oneValue" indexVar="index" >
+                <p>
+                    <lightning:pill class="slds-truncate_container_100" label="{!oneValue}" href="{!oneValue}"  >
+                        <aura:set attribute="media">
+                            <lightning:avatar initials="{!index + 1}" fallbackIconName="standard:iot_context" />
+                        </aura:set>
+                    </lightning:pill>
+                </p>
+            </aura:iteration>
+        </div>
+    </aura:if>
+    <aura:if isTrue="{!v.type == 'String[]'}">
+        <aura:if isTrue="{!and(v.value, v.value.length)}" >
+            <div class="pill-list" >
+                <aura:iteration items="{!v.value}" var="oneValue" indexVar="index" >
+                    <p class="slds-truncate_container_100" >
+                        {!oneValue}
+                    </p>
+                </aura:iteration>
+            </div>
+            <aura:set attribute="else" >
+                <span>-</span>
+            </aura:set>
+        </aura:if>
+    </aura:if>
+    <aura:if isTrue="{!v.type == 'Number' || v.type == 'Currency'}">
+        <lightning:formattedNumber value="{!v.value}" minimumFractionDigits="2" />
+    </aura:if>
+     
+    <aura:if isTrue="{!v.type == 'String' || v.type == 'Picklist' || v.type == 'TextArea'}">
+        <!--<lightning:formattedText linkify="false" value="{!v.value}" />-->
+        <p>{!v.value}</p>
+    </aura:if>
+</aura:component>
