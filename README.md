@@ -6,11 +6,11 @@ This repo implements one dimensional table and two dimensional table.
 
 Pull the repo on your local machine, then run these commands with SFDX:
 
-$ sfdx force:org:create -f config/project-scratch-def.json --setalias auradatatables --durationdays 1 --setdefaultusername --json --loglevel fatal
+$ `sfdx force:org:create -f config/project-scratch-def.json --setalias auradatatables --durationdays 1 --setdefaultusername --json --loglevel fatal`
 
-$ sfdx force:source:push --json --loglevel fatal --forceoverwrite
+$ `sfdx force:source:push --json --loglevel fatal --forceoverwrite`
 
-$ sfdx force:org:open -p "/lightning/cmp/c__demo"
+$ `sfdx force:org:open -p "/lightning/cmp/c__demo"`
 
 ## Folder Structure
 ```
