@@ -1,4 +1,4 @@
-<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickAction,flexipage:availableForAllPageTypes" access="global" >
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickAction,flexipage:availableForAllPageTypes,lightning:isUrlAddressable" access="global" >
     <aura:attribute name="data" type="Object" />
     <aura:attribute name="data2" type="Object" />
     <aura:handler action="{!c.doInit}" value="this" name="init" />
