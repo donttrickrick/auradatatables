@@ -1,14 +1,21 @@
 <aura:component implements="flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickAction,flexipage:availableForAllPageTypes,lightning:isUrlAddressable" access="global" >
     <aura:attribute name="data" type="Object" />
     <aura:attribute name="data2" type="Object" />
+    <aura:attribute name="data3" type="Object" />
     <aura:handler action="{!c.doInit}" value="this" name="init" />
     
     <lightning:card >
         <aura:if isTrue="{!v.data}" >
+            1) Two Dimention Table 1
             <c:TwoDimensionTable data="{!v.data}" />
         </aura:if>
         <aura:if isTrue="{!v.data2}" >
+            2) Two Dimention Table 2
             <c:TwoDimensionTable data="{!v.data2}" />
+        </aura:if>
+        <aura:if isTrue="{!v.data3}" >
+            3) Sticky Headers
+            <c:TwoDimensionTable class="sticky-table" isHeaderSticky="true" data="{!v.data3}" />
         </aura:if>
     </lightning:card>
 </aura:component>

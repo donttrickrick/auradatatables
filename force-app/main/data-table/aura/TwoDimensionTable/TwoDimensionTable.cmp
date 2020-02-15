@@ -1,0 +1,88 @@
+<!--summary table with measures in 2 dimensions-->
+<aura:component >
+    <!--first level is column header, second level is row header-->
+    <aura:attribute name="headerMode" type="String" default="truncate" description="truncate/wrap" /> 
+
+    <aura:attribute name="data" type="Object" /> 
+    <aura:attribute name="columnsProperties" type="Object" /> 
+    <aura:attribute name="type" type="String" default="String" /> 
+    <aura:attribute name="types" type="String[]" default="String" /> 
+    <aura:attribute name="columns" type="Object[]" /> 
+    <aura:attribute name="rows" type="Object[]" /> 
+    <aura:attribute name="cornerLabel" type="String" default="" /> 
+    <aura:attribute name="isHeaderSticky" type="Boolean" />
+    <aura:attribute name="isStickyInitDone" type="Boolean" /> 
+    <aura:attribute name="class" type="String" /> 
+
+    <!-- <aura:attribute name="show2ndLevelColumnHeaderLeftBorder" type="Boolean" default="false" /> -->
+    <aura:handler value="this" name="init" action="{!c.doInit}" />
+    
+    <aura:if isTrue="{!v.rows.length > 0}" >
+        <div aura:id="table-wrapper" class="{!join(' ', v.class, ' slds-table_edit_container slds-is-relative ', if(v.isStickyInitDone, '', 'sticky-init-preparing'), if(v.isHeaderSticky, 'sticky-table', ''))}">
+            <table class="slds-table slds-table_bordered slds-table_col-bordered slds-table_cell-buffer" role="grid" >
+                <thead >
+                    <aura:iteration items="{!v.columns}" var="oneLevelColumn" indexVar="levelIndex" >
+                        <tr class="slds-text-title--caps">
+                            <aura:iteration items="{!oneLevelColumn}" var="headerItem" indexVar="itemIndex" >
+                                <c:TwoDimentionTableHeaderItem aura:id="header-item" type="{!headerItem.headerType}" isSticky="{!v.isHeaderSticky}" class="{!if(headerItem.showLeftBorder, '_2nd-level-column-header-left-border', '')}" colspan="{!headerItem.colspan}" rowspan="{!headerItem.rowspan}" scope="col">
+                                    <div class="{!if(v.headerMode == 'truncate', 'slds-truncate', 'slds-cell-wrap')}" title="{!headerItem.label}" >
+                                        <aura:if isTrue="{!headerItem.iconName}">
+                                            <lightning:icon iconName="{!headerItem.iconName}" class="header-icon" size="x-small" />
+                                        </aura:if>
+                                        {!headerItem.label}
+                                        <aura:if isTrue="{!headerItem.tooltip}">
+                                            <lightning:helptext class="tooltip" content="{!headerItem.tooltip}" />
+                                        </aura:if>
+                                    </div>
+                                </c:TwoDimentionTableHeaderItem>
+                            </aura:iteration>
+                        </tr>
+                    </aura:iteration>
+                </thead>
+                
+                <aura:if isTrue="{!v.rows.length > 0}" >
+                    <tbody>
+                        <aura:iteration items="{!v.rows}" var="oneRow">
+                            <tr class="slds-hint-parent ">
+                                <aura:iteration items="{!oneRow.items}" var="oneItem" >
+                                    <aura:if isTrue="{!oneItem.rowItemType == 'RowHeader'}">
+                                        <c:TwoDimentionTableHeaderItem aura:id="header-item" type="{!oneItem.headerType}" isSticky="{!v.isHeaderSticky}" class="{!concat(if(oneItem.showLeftBorder, '_2nd-level-column-header-left-border ', ''), if(oneItem.type == 'Icon', 'slds-align_absolute-center slds-cell-edit slds-text-title--caps', 'slds-cell-edit slds-text-title--caps'))}" colspan="{!oneItem.colspan}" rowspan="{!oneItem.rowspan}">
+                                            <span >
+                                                <span class="{!if(v.headerMode == 'truncate', 'slds-truncate', 'slds-cell-wrap')}" title="{!if(oneItem.fieldValue.Name, oneItem.fieldValue.Name, oneItem.fieldValue)}">
+                                                    <c:OutputField type="{!oneItem.type}" value="{!oneItem.fieldValue}" />
+                                                </span>
+                                                <aura:if isTrue="{!oneItem.tooltip}">
+                                                    <lightning:helptext class="tooltip" content="{!oneItem.tooltip}" />
+                                                </aura:if>
+                                            </span>
+                                        </c:TwoDimentionTableHeaderItem>
+                                        <aura:set attribute="else">
+                                            <td colspan="{!oneItem.colspan}" rowspan="{!oneItem.rowspan}" class="{!if(oneItem.type == 'Icon', 'slds-align_absolute-center slds-cell-edit', 'slds-cell-edit')}" role="gridcell">
+                                                <span >
+                                                    <span class="{!if(v.headerMode == 'truncate', 'slds-truncate', 'slds-cell-wrap')}" title="{!if(oneItem.fieldValue.Name, oneItem.fieldValue.Name, oneItem.fieldValue)}">
+                                                        <aura:if isTrue="{!or(oneItem.fieldValue.mode == 'output', !oneItem.fieldValue.mode)}" >
+                                                            <c:OutputField type="{!if(oneItem.fieldValue.type, oneItem.fieldValue.type, oneItem.type)}" value="{!oneItem.fieldValue}" />
+                                                        </aura:if>
+                                                        <aura:if isTrue="{!oneItem.fieldValue.mode == 'input'}" >
+                                                            <c:InputField type="{!oneItem.fieldValue.type}" value="{!oneItem.fieldValue}" />
+                                                        </aura:if>
+
+                                                    </span>
+                                                </span>
+                                            </td>
+                                        </aura:set>
+                                    </aura:if>
+                                </aura:iteration>
+                            </tr>
+                        </aura:iteration>
+                    </tbody>
+                </aura:if>
+            </table>
+        </div>
+    </aura:if>
+    <aura:if isTrue="{!v.rows.length == 0}" >
+        <div class="slds-align_absolute-center" >
+            No Data.
+        </div>
+    </aura:if>
+</aura:component>
