@@ -13,10 +13,11 @@ $ `sfdx force:source:push --json --loglevel fatal --forceoverwrite`
 $ `sfdx force:org:open -p "/lightning/cmp/c__demo"`
 
 ## Folder Structure
-```	
+
+```
 force-app
 └── main
-    ├── default
+    ├── data-table
     │   └── aura
     │       ├── DataTable
     │       │   ├── DataTable.cmp
@@ -31,19 +32,23 @@ force-app
     │       │   ├── OutputField.cmp-meta.xml
     │       │   ├── OutputField.css
     │       │   └── OutputFieldController.js
-    │       └── TwoDimensionTable
-    │           ├── TwoDimensionTable.cmp
-    │           ├── TwoDimensionTable.cmp-meta.xml
-    │           ├── TwoDimensionTable.css
-    │           ├── TwoDimensionTable.design
-    │           ├── TwoDimensionTable.svg
-    │           ├── TwoDimensionTableController.js
-    │           ├── TwoDimensionTableHelper.js
-    │           └── TwoDimensionTableRenderer.js
-    └── demo
+    │       ├── TwoDimensionTable
+    │       │   ├── TwoDimensionTable.cmp
+    │       │   ├── TwoDimensionTable.cmp-meta.xml
+    │       │   ├── TwoDimensionTable.css
+    │       │   ├── TwoDimensionTableController.js
+    │       │   ├── TwoDimensionTableHelper.js
+    │       │   └── TwoDimensionTableRenderer.js
+    │       └── TwoDimentionTableHeaderItem
+    │           ├── TwoDimentionTableHeaderItem.cmp
+    │           ├── TwoDimentionTableHeaderItem.cmp-meta.xml
+    │           ├── TwoDimentionTableHeaderItem.css
+    │           └── TwoDimentionTableHeaderItemController.js
+    └── default
         └── aura
             └── Demo
                 ├── Demo.cmp
                 ├── Demo.cmp-meta.xml
+                ├── Demo.css
                 └── DemoController.js
 ```

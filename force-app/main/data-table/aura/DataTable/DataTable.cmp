@@ -2,6 +2,8 @@
     <aura:attribute name="columns" type="Object[]" />
     <aura:attribute name="data" type="Object[]" />
     <aura:attribute name="rows" type="Object[]" />
+    <aura:attribute name="start" type="Integer" />
+    <aura:attribute name="end" type="Integer" />
     
     <aura:handler value="this" name="init" action="{!c.doInit}" />
     
@@ -30,7 +32,7 @@
                     <tbody>
                         <!--<aura:iteration items="{!v.data}" var="oneData" >-->
                         
-                        <aura:iteration items="{!v.rows}" var="oneRow">
+                        <aura:iteration items="{!v.rows}" var="oneRow" start="{!v.start}" end="{!v.end}" >
                             <tr class="slds-hint-parent">
                                 
                                 <td class="slds-cell-error slds-cell-edit" role="gridcell">

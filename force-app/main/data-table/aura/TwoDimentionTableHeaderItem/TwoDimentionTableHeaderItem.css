@@ -1,0 +1,24 @@
+.THIS.row-header,
+.THIS.row-header:focus,
+.THIS.row-header:hover {
+    box-shadow: 6px 0 6px -0.5px rgba(0, 0, 0, 0.15) !important;
+}
+.THIS.col-header,
+.THIS.col-header:focus,
+.THIS.col-header:hover {
+    box-shadow: 0px 1px 1px -.5px rgba(0, 0, 0, 0.15) !important;
+}
+.THIS.joint-header,
+.THIS.joint-header:focus,
+.THIS.joint-header:hover {
+    box-shadow: 6px 0 6px -0.5px rgba(0, 0, 0, 0.15) !important;
+}
+.THIS.joint-header { 
+    z-index: 10;
+}
+.THIS.row-header { 
+    z-index: 1;
+}
+.THIS.col-header { 
+    z-index: 2;
+}

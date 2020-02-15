@@ -17,3 +17,19 @@
 .THIS .slds-table ._2nd-level-column-header-left-border {
     border-left: var(--lwc-borderWidthThin,1px) solid var(--lwc-colorBorder,rgb(221, 219, 218));
 }
+.THIS .slds-table_cell-buffer tr>th:last-child, 
+.THIS .slds-table_cell-buffer tr>td:last-child, 
+.THIS .slds-table--cell-buffer tr>th:last-child, 
+.THIS .slds-table--cell-buffer tr>td:last-child {
+    padding-right: 8px;
+}
+.THIS .tooltip {
+    top: -4px;
+    position: relative;
+}
+.THIS.sticky-init-preparing {
+    width: 1px;
+}
+.THIS.sticky-table {
+    overflow: auto; 
+}

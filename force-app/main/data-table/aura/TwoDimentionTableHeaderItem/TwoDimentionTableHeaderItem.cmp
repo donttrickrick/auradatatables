@@ -1,0 +1,17 @@
+<aura:component>
+    <aura:attribute name="class" type="String" />
+    <aura:attribute name="colspan" type="String" />
+    <aura:attribute name="rowspan" type="String" />
+    <aura:attribute name="scope" type="String" />
+    <aura:attribute name="isSticky" type="Boolean" />
+    <aura:attribute name="thId" type="String" />
+    <aura:attribute name="type" type="String" description="row/col/joint" />
+
+    <aura:method name="applySticky" action="{!c.setStickyHeader}" >
+    </aura:method>
+    <aura:handler name="init" value="this" action="{!c.doInit}" />
+
+    <th id="{!v.thId}" class="{!join(' ', 'th', v.class, if(v.type == 'row', 'row-header', if(v.type == 'col', 'col-header', 'joint-header')))}" colspan="{!v.colspan}" rowspan="{!v.rowspan}" scope="{!v.scope}" >
+        {!v.body}
+    </th>
+</aura:component>	
